@@ -1,0 +1,18 @@
+#!/usr/bin/env perl
+#PODNAME: ringleader
+#ABSTRACT: proxy and manage sporadically-used web applications
+
+=head1 SYNOPSIS
+
+    $ ringleader ringleader.yml
+
+=head1 DESCRIPTION
+
+See L<App::Ringleader> for more information, and a description of the
+configuration file.
+
+=cut
+
+use App::Ringleader;
+
+App::Ringleader->new_with_options->run;
