@@ -138,7 +138,7 @@ sub run {
 
     $proxy->push_filter( 
         request => HTTP::Proxy::HeaderFilter::simple->new( sub {
-            my( undef, $headers, $request ) = @_;
+            my( undef, undef, $request ) = @_;
             my $uri = $request->uri;
             my $host = $uri->host;
 
