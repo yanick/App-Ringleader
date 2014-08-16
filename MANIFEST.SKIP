@@ -5,3 +5,4 @@ App-Ringleader.*
 ^\.git
 ^\.build
 
+.mailmap

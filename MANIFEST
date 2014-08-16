@@ -11,9 +11,8 @@ README
 README.mkdn
 SIGNATURE
 bin/ringleader
+contrib/ringleader.yml
 lib/App/Ringleader.pm
-ringleader.yaml
 t/00-compile.t
 t/000-report-versions-tiny.t
-wakey_proxy.pl
 xt/release/unused-vars.t
