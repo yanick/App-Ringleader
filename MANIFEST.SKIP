@@ -1,8 +1,0 @@
-^dist.ini
-^MANIFEST.SKIP
-App-Ringleader.*
-^\.gitignore
-^\.git
-^\.build
-
-.mailmap

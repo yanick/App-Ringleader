@@ -1,64 +1,9 @@
 package App::Ringleader;
+BEGIN {
+  $App::Ringleader::AUTHORITY = 'cpan:YANICK';
+}
 # ABSTRACT: Proxy for sproradically-used web application
-
-=head1 SYNOPSIS
-
-    use App::Ringleader;
-
-    App::Ringleader->new( conf => 'ringleader.yml' )->run;
-
-=head1 DESCRIPTION
-
-Ringleader is a proxy that will wake up psgi applications upon request 
-and shut them down after a period of inactivity. It's meant to provide a
-middle-ground between the slowliness of CGI and the constant resource
-consumption of plack applications for services that are not often used.
-
-Typically, you'll use it via the C<ringleader> script.
-
-Ringleader relies on L<Ubic> to start and stop the services. For PSGI
-applications, you probably want to define your services using
-L<Ubic::Service::Plack>.
-
-=head1 CONFIGURATION FILE
-
-The Ringleader configuration file is YAML-based, and looks like
-
-    port: 3000
-    inactivity_delay: 60
-    services:
-        techblog.babyl.ca:  webapp.techblog
-        kittenwar.babyl.ca: webapp.kittenwar
-    CHI:
-        driver: FastMmap
-
-=head2 port
-
-The port of the proxy. Defaults to I<3000>.
-
-
-=head2 inactivity_delay
-
-The minimum time (in minutes) of inactivity before a service will be shut down.
-
-Defaults to 60 minutes.
-
-=head2 services
-
-The services Ringleader will monitor. Each service is configured via a
-key/value pair. The key is the request's host, and the value is the 
-<Ubic> service it related to.
-
-=head2 CHI
-
-The arguments to pass to L<CHI> to build the caching system used
-by the service. If not provided, L<CHI::Driver::FastMmap> will be used.
-
-=head1 SEE ALSO
-
-L<http://techblog.babyl.ca/entry/ringleader> - The original blog entry
-
-=cut
+$App::Ringleader::VERSION = '0.1.0';
 
 use 5.10.0;
 
@@ -188,3 +133,86 @@ sub check_activity_for {
 }
 
 1;
+
+__END__
+
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+App::Ringleader - Proxy for sproradically-used web application
+
+=head1 VERSION
+
+version 0.1.0
+
+=head1 SYNOPSIS
+
+    use App::Ringleader;
+
+    App::Ringleader->new( conf => 'ringleader.yml' )->run;
+
+=head1 DESCRIPTION
+
+Ringleader is a proxy that will wake up psgi applications upon request 
+and shut them down after a period of inactivity. It's meant to provide a
+middle-ground between the slowliness of CGI and the constant resource
+consumption of plack applications for services that are not often used.
+
+Typically, you'll use it via the C<ringleader> script.
+
+Ringleader relies on L<Ubic> to start and stop the services. For PSGI
+applications, you probably want to define your services using
+L<Ubic::Service::Plack>.
+
+=head1 CONFIGURATION FILE
+
+The Ringleader configuration file is YAML-based, and looks like
+
+    port: 3000
+    inactivity_delay: 60
+    services:
+        techblog.babyl.ca:  webapp.techblog
+        kittenwar.babyl.ca: webapp.kittenwar
+    CHI:
+        driver: FastMmap
+
+=head2 port
+
+The port of the proxy. Defaults to I<3000>.
+
+=head2 inactivity_delay
+
+The minimum time (in minutes) of inactivity before a service will be shut down.
+
+Defaults to 60 minutes.
+
+=head2 services
+
+The services Ringleader will monitor. Each service is configured via a
+key/value pair. The key is the request's host, and the value is the 
+<Ubic> service it related to.
+
+=head2 CHI
+
+The arguments to pass to L<CHI> to build the caching system used
+by the service. If not provided, L<CHI::Driver::FastMmap> will be used.
+
+=head1 SEE ALSO
+
+L<http://techblog.babyl.ca/entry/ringleader> - The original blog entry
+
+=head1 AUTHOR
+
+Yanick Champoux <yanick@babyl.dyndns.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2014 by Yanick Champoux.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
